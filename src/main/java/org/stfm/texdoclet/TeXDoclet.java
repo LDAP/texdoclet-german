@@ -601,8 +601,8 @@ public class TeXDoclet extends Doclet {
 					}
 				}
 				if (!found) {
-					System.err.println("Package " + pkg
-							+ " not found, aborting.");
+					System.err.println("Paket " + pkg
+							+ " nicht gefunden, wird abgebrochen.");
 					return false;
 				}
 				if (i != j) {
@@ -681,7 +681,7 @@ public class TeXDoclet extends Doclet {
 
 			addFile(os, packageFile, false);
 
-			os.println("\\" + sectionLevels[0] + "{Package "
+			os.println("\\" + sectionLevels[0] + "{Paket "
 					+ HTMLtoLaTeXBackEnd.fixText(pkg.pkg) + "}{");
 
 			os.print("\\label{" + refName(makeRefKey(pkg.pkg)) + "}");
@@ -701,12 +701,12 @@ public class TeXDoclet extends Doclet {
 					os.println("\\hskip -.05in");
 				}
 				os.println("\\hbox to \\hsize{" + ITALIC
-						+ " Package Contents\\hfil Page}}");
+						+ " Paketinhalte\\hfil Page}}");
 				if (useHr) {
 					os.println("\\rule{\\hsize}{.7mm}");
 				}
-				tocForClasses("Interfaces", pkg.interfaces);
-				tocForClasses("Classes", pkg.classes);
+				tocForClasses("Schnittstellen", pkg.interfaces);
+				tocForClasses("Klassen", pkg.classes);
 				tocForClasses("Exceptions", pkg.exceptions);
 				os.println("\\vskip .1in");
 				if (useHr) {
@@ -735,10 +735,10 @@ public class TeXDoclet extends Doclet {
 			// "\\markboth{\\protect\\packagename \\hspace{.02in} -- \\protect\\classname}{\\protect\\packagename \\hspace{.02in} -- \\protect\\classname}"
 			// );
 
-			layoutClasses("Interfaces", pkg.interfaces);
-			layoutClasses("Classes", pkg.classes);
+			layoutClasses("Schnittstellen", pkg.interfaces);
+			layoutClasses("Klassen", pkg.classes);
 			layoutClasses("Exceptions", pkg.exceptions);
-			layoutClasses("Error", pkg.errors);
+			layoutClasses("Fehler", pkg.errors);
 
 			os.println("}");
 		}
@@ -1038,13 +1038,13 @@ public class TeXDoclet extends Doclet {
 
 	static void printClassHierarchy(RootDoc root) {
 
-		os.println("\\" + sectionLevels[0] + "*{Class Hierarchy}{");
+		os.println("\\" + sectionLevels[0] + "{Klassenhierarchie}{");
 
 		os.println("\\thispagestyle{empty}");
-		os.println("\\markboth{Class Hierarchy}{Class Hierarchy}");
+		os.println("\\markboth{Klassenhierarchie}{Klassenhierarchie}");
 
 		os.println("\\addcontentsline{toc}{" + sectionLevels[0]
-				+ "}{Class Hierarchy}");
+				+ "}{Klassenhierarchie}");
 
 		// Classes
 		ClassHierachy classHierachy = new ClassHierachy();
@@ -1128,9 +1128,9 @@ public class TeXDoclet extends Doclet {
 
 			os.print("\\" + sectionLevels[1] + "{");
 
-			String mtype = "Class";
-			if (type.equals("Interfaces")) {
-				mtype = "Interface";
+			String mtype = "Klasse";
+			if (type.equals("Schnittstellen")) {
+				mtype = "Schnittstelle";
 			}
 			if (type.equals("Exceptions")) {
 				mtype = "Exception";
@@ -1174,7 +1174,7 @@ public class TeXDoclet extends Doclet {
 				os.println("  \\end{list}");
 			}
 
-			os.println("\\" + sectionLevels[2] + "{Declaration}{");
+			os.println("\\" + sectionLevels[2] + "{Deklaration}{");
 
 			os.println("\\begin{lstlisting}[frame=" + classDeclarationFrame
 					+ "]");
@@ -1236,12 +1236,12 @@ public class TeXDoclet extends Doclet {
 			if (cd.isInterface()) {
 				if (!subclasses.equals("")) {
 					os.println("\\" + sectionLevels[2]
-							+ "{All known subinterfaces}{" + subclasses + "}");
+							+ "{Alle bekannten Unterschnittstellen}{" + subclasses + "}");
 				}
 			} else {
 				if (!subclasses.equals("")) {
 					os.println("\\" + sectionLevels[2]
-							+ "{All known subclasses}{" + subclasses + "}");
+							+ "{Alle bekannten Unterklassen}{" + subclasses + "}");
 				}
 			}
 
@@ -1280,7 +1280,7 @@ public class TeXDoclet extends Doclet {
 
 				if (!implclasses.equals("")) {
 					os.println("\\" + sectionLevels[2]
-							+ "{All classes known to implement interface}{"
+							+ "{Alle bekannten Klassen, die die Schnittstelle implementieren}{"
 							+ implclasses + "}");
 				}
 			}
@@ -1288,41 +1288,41 @@ public class TeXDoclet extends Doclet {
 			if (summaries) {
 				flds = cd.fields();
 				if (flds.length > 0) {
-					printFieldSummary(flds, "Field summary");
+					printFieldSummary(flds, "Feldzusammenfassung");
 				}
 
 				if (useConstructorSummary) {
 					mems = cd.constructors();
 					if (mems.length > 0) {
-						printMethodSummary(mems, "Constructor summary");
+						printMethodSummary(mems, "Konstruktorzusammenfassung");
 					}
 				}
 
 				if (useFieldSummary) {
 					mems = cd.methods();
 					if (mems.length > 0) {
-						printMethodSummary(mems, "Method summary");
+						printMethodSummary(mems, "Methodenzusammenfassung");
 					}
 				}
 			}
 
 			flds = cd.serializableFields();
 			if (flds.length > 0 && serial) {
-				printFields(cd, flds, "Serializable Fields", false);
+				printFields(cd, flds, "\\enquote{Serializable} Felder", false);
 			}
 			flds = cd.fields();
 			if (flds.length > 0) {
-				printFields(cd, flds, "Fields", true);
+				printFields(cd, flds, "Felder", true);
 			}
 			mems = cd.constructors();
 			if (mems.length > 0) {
-				os.println("\\" + sectionLevels[2] + "{Constructors}{");
+				os.println("\\" + sectionLevels[2] + "{Konstruktoren}{");
 				printMembers(cd, mems, true);
 				os.println("}");
 			}
 			mems = cd.methods();
 			if (mems.length > 0) {
-				os.println("\\" + sectionLevels[2] + "{Methods}{");
+				os.println("\\" + sectionLevels[2] + "{Methoden}{");
 				printMembers(cd, mems, true);
 				os.println("}");
 			}
@@ -1735,9 +1735,9 @@ public class TeXDoclet extends Doclet {
 			}
 			os.println("\\item{");
 			if (copiedTo == null) {
-				os.println(BOLD + " Description}\n");
+				os.println(BOLD + " Beschreibung}\n");
 			} else {
-				os.print(BOLD + " Description copied from ");
+				os.print(BOLD + " Beschreibung kopiert von ");
 				String classname = mem.containingClass().qualifiedName();
 				if (hyperref) {
 					os.print("\\hyperlink{" + refName(makeRefKey(classname))
@@ -1762,7 +1762,7 @@ public class TeXDoclet extends Doclet {
 				yet = true;
 			}
 			os.println("\\item{");
-			os.println(BOLD + " Parameters}");
+			os.println(BOLD + " Parameter}");
 			os.println("  \\begin{itemize}");
 			for (int j = 0; j < params.length; ++j) {
 				os.println("   \\item{");
