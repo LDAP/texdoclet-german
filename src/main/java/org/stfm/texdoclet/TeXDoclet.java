@@ -572,12 +572,12 @@ public class TeXDoclet extends Doclet {
 
 		if (root.inlineTags().length > 0) {
 
-			os.println("\\" + sectionLevels[0] + "*{Introduction}{");
+			os.println("\\" + sectionLevels[0] + "{Einleitung}{");
 			os.println(" \\addcontentsline{toc}{" + sectionLevels[0]
-					+ "}{Introduction}");
+					+ "}{Einleitung}");
 
 			os.println("\\thispagestyle{empty}");
-			os.println("\\markboth{Introduction}{Introduction}");
+			os.println("\\markboth{Introduction}{Einleitung}");
 			printTags(null, root.inlineTags());
 			os.println("}");
 
@@ -624,14 +624,14 @@ public class TeXDoclet extends Doclet {
 		}
 
 		if (clsFilt != null) {
-			System.out.println("...Filter Classes with: " + clsFilt);
+			System.out.println("...Filter Klassen mit: " + clsFilt);
 		}
 		List<String> added = new ArrayList<String>();
 		for (int i = 0; i < cls.length; ++i) {
 			ClassDoc cd = cls[i];
 
 			if (clsFilt != null && clsFilt.includeClass(cd) == false) {
-				System.out.println("...Filtering out Class: "
+				System.out.println("...Filter Klasse: "
 						+ cd.qualifiedName());
 				continue;
 			}
@@ -964,7 +964,7 @@ public class TeXDoclet extends Doclet {
 		os.println("\\newcommand{\\refdefined}[1]{");
 		os.println("\\expandafter\\ifx\\csname r@#1\\endcsname\\relax");
 		os.println("\\relax\\else");
-		os.println("{$($in \\ref{#1}, page \\pageref{#1}$)$}\\fi}");
+		os.println("{$($in \\ref{#1}, Seite \\pageref{#1}$)$}\\fi}");
 	}
 
 	/**
@@ -1057,7 +1057,7 @@ public class TeXDoclet extends Doclet {
 		}
 		if (classHierachy.root.size() != 0) {
 
-			os.println("\\" + sectionLevels[1] + "*{Classes}");
+			os.println("\\" + sectionLevels[1] + "{Klassen}");
 
 			os.println("{\\raggedright");
 
@@ -1076,7 +1076,7 @@ public class TeXDoclet extends Doclet {
 			}
 		}
 		if (interfaceHierachy.root.size() != 0) {
-			os.println("\\" + sectionLevels[1] + "*{Interfaces}");
+			os.println("\\" + sectionLevels[1] + "{Interfaces}");
 			interfaceHierachy.printTree(root, overviewindent);
 		}
 
@@ -1090,7 +1090,7 @@ public class TeXDoclet extends Doclet {
 			}
 		}
 		if (exceptionHierachy.root.size() != 0) {
-			os.println("\\" + sectionLevels[1] + "*{Exceptions}");
+			os.println("\\" + sectionLevels[1] + "{Exceptions}");
 			exceptionHierachy.printTree(root, overviewindent);
 		}
 
@@ -1104,7 +1104,7 @@ public class TeXDoclet extends Doclet {
 			}
 		}
 		if (errorHierachy.root.size() != 0) {
-			os.println("\\" + sectionLevels[1] + "*{Errors}");
+			os.println("\\" + sectionLevels[1] + "{Errors}");
 			errorHierachy.printTree(root, overviewindent);
 		}
 
