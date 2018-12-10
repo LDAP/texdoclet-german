@@ -1510,7 +1510,7 @@ public class TeXDoclet extends Doclet {
 			if (hyperref) {
 				os.print("\\hyperref["
 						+ refName(makeRefKey(mem.qualifiedName()
-								+ mem.signature())) + "]{");
+								+ mem.signature())) + "]{\\ttfamily ");
 			}
 			os.print(BOLD
 					+ HTMLtoLaTeXBackEnd.fixText(mem.name()
@@ -1547,7 +1547,7 @@ public class TeXDoclet extends Doclet {
 			FieldDoc mem = itr.next();
 			if (hyperref) {
 				os.print("\\hyperref["
-						+ refName(makeRefKey(mem.qualifiedName())) + "]{");
+						+ refName(makeRefKey(mem.qualifiedName())) + "]{\\ttfamily ");
 			}
 			os.print(BOLD + HTMLtoLaTeXBackEnd.fixText(mem.name()) + "}");
 			if (hyperref) {
@@ -1741,7 +1741,7 @@ public class TeXDoclet extends Doclet {
 				String classname = mem.containingClass().qualifiedName();
 				if (hyperref) {
 					os.print("\\hyperref[" + refName(makeRefKey(classname))
-							+ "]{");
+							+ "]{\\ttfamily");
 				}
 				os.print(packageRelativIdentifier(pac, classname));
 				if (hyperref) {
@@ -2063,7 +2063,7 @@ public class TeXDoclet extends Doclet {
 					htmlstr += "<TEX txt=\"\\texttt{\\small ";
 					if (hyperref) {
 						htmlstr += "\\hyperref["
-								+ refName(makeRefKey(linkstr)) + "]{";
+								+ refName(makeRefKey(linkstr)) + "]{\\ttfamily ";
 					}
 					if (!link.label().isEmpty()) {
 						label = link.label();
@@ -2198,7 +2198,7 @@ public class TeXDoclet extends Doclet {
 		if (memName.equals("") == false) {
 			os.print(TRUETYPE);
 			if (hyperref) {
-				os.print("\\hyperref[" + refName(makeRefKey(memName)) + "]{");
+				os.print("\\hyperref[" + refName(makeRefKey(memName)) + "]{\\ttfamily ");
 			}
 			// os.print(HTMLtoLaTeXBackEnd.fixText(memText));
 			// System.out.println("see also link : " + memText);
