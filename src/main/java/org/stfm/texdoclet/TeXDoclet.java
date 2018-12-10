@@ -195,9 +195,9 @@ public class TeXDoclet extends Doclet {
 	public static final String DEFAULT_CLASS_FRAME = "none";
 	public static final String DEFAULT_METHOD_FRAME = "none";
 
-	public static final String BOLD = "{\\bf ";
+	//public static final String BOLD = "{\\bf ";
 	// no bold AND truetype support if using textbf !
-	// public static final String BOLD = "\\textbf{";
+	public static final String BOLD = "\\textbf{";
 	// public static final String TRUETYPE = "{\\tt ";
 	public static final String TRUETYPE = "\\texttt{";
 	// public static final String ITALIC = "{\\it ";
@@ -573,8 +573,8 @@ public class TeXDoclet extends Doclet {
 		if (root.inlineTags().length > 0) {
 
 			os.println("\\" + sectionLevels[0] + "{Einleitung}{");
-			os.println(" \\addcontentsline{toc}{" + sectionLevels[0]
-					+ "}{Einleitung}");
+			//os.println(" \\addcontentsline{toc}{" + sectionLevels[0]
+			//		+ "}{Einleitung}");
 
 			os.println("\\thispagestyle{empty}");
 			os.println("\\markboth{Introduction}{Einleitung}");
@@ -701,13 +701,13 @@ public class TeXDoclet extends Doclet {
 					os.println("\\hskip -.05in");
 				}
 				os.println("\\hbox to \\hsize{" + ITALIC
-						+ " Paketinhalte\\hfil Page}}");
+						+ " Paketinhalte\\hfil Seite}}");
 				if (useHr) {
 					os.println("\\rule{\\hsize}{.7mm}");
 				}
 				tocForClasses("Schnittstellen", pkg.interfaces);
 				tocForClasses("Klassen", pkg.classes);
-				tocForClasses("Exceptions", pkg.exceptions);
+				tocForClasses("Ausnahmen", pkg.exceptions);
 				os.println("\\vskip .1in");
 				if (useHr) {
 					os.println("\\rule{\\hsize}{.7mm}");
@@ -737,7 +737,7 @@ public class TeXDoclet extends Doclet {
 
 			layoutClasses("Schnittstellen", pkg.interfaces);
 			layoutClasses("Klassen", pkg.classes);
-			layoutClasses("Exceptions", pkg.exceptions);
+			layoutClasses("Ausnahmen", pkg.exceptions);
 			layoutClasses("Fehler", pkg.errors);
 
 			os.println("}");
@@ -841,7 +841,7 @@ public class TeXDoclet extends Doclet {
 		} else if (sectionLevelMax.equals(SUBSECTION_LEVEL)) {
 			sectionLevels[0] = "subsection";
 			sectionLevels[1] = "subsubsection";
-			sectionLevels[2] = "subsubsection";
+			sectionLevels[2] = "paragraph";
 		}
 	}
 
@@ -1043,8 +1043,8 @@ public class TeXDoclet extends Doclet {
 		os.println("\\thispagestyle{empty}");
 		os.println("\\markboth{Klassenhierarchie}{Klassenhierarchie}");
 
-		os.println("\\addcontentsline{toc}{" + sectionLevels[0]
-				+ "}{Klassenhierarchie}");
+		//os.println("\\addcontentsline{toc}{" + sectionLevels[0]
+		//		+ "}{Klassenhierarchie}");
 
 		// Classes
 		ClassHierachy classHierachy = new ClassHierachy();
@@ -1090,7 +1090,7 @@ public class TeXDoclet extends Doclet {
 			}
 		}
 		if (exceptionHierachy.root.size() != 0) {
-			os.println("\\" + sectionLevels[1] + "{Exceptions}");
+			os.println("\\" + sectionLevels[1] + "{Ausnahmen}");
 			exceptionHierachy.printTree(root, overviewindent);
 		}
 
@@ -1132,8 +1132,8 @@ public class TeXDoclet extends Doclet {
 			if (type.equals("Schnittstellen")) {
 				mtype = "Schnittstelle";
 			}
-			if (type.equals("Exceptions")) {
-				mtype = "Exception";
+			if (type.equals("Ausnahmen")) {
+				mtype = "Ausnahme";
 			}
 			os.print("\\label{" + refName(makeRefKey(cd.qualifiedName())) + "}");
 			if (index) {
@@ -1508,9 +1508,9 @@ public class TeXDoclet extends Doclet {
 		while (itr.hasNext()) {
 			ExecutableMemberDoc mem = itr.next();
 			if (hyperref) {
-				os.print("\\hyperlink{"
+				os.print("\\hyperref["
 						+ refName(makeRefKey(mem.qualifiedName()
-								+ mem.signature())) + "}{");
+								+ mem.signature())) + "]{");
 			}
 			os.print(BOLD
 					+ HTMLtoLaTeXBackEnd.fixText(mem.name()
@@ -1546,8 +1546,8 @@ public class TeXDoclet extends Doclet {
 		while (itr.hasNext()) {
 			FieldDoc mem = itr.next();
 			if (hyperref) {
-				os.print("\\hyperlink{"
-						+ refName(makeRefKey(mem.qualifiedName())) + "}{");
+				os.print("\\hyperref["
+						+ refName(makeRefKey(mem.qualifiedName())) + "]{");
 			}
 			os.print(BOLD + HTMLtoLaTeXBackEnd.fixText(mem.name()) + "}");
 			if (hyperref) {
@@ -1740,8 +1740,8 @@ public class TeXDoclet extends Doclet {
 				os.print(BOLD + " Beschreibung kopiert von ");
 				String classname = mem.containingClass().qualifiedName();
 				if (hyperref) {
-					os.print("\\hyperlink{" + refName(makeRefKey(classname))
-							+ "}{");
+					os.print("\\hyperref[" + refName(makeRefKey(classname))
+							+ "]{");
 				}
 				os.print(packageRelativIdentifier(pac, classname));
 				if (hyperref) {
@@ -1865,7 +1865,7 @@ public class TeXDoclet extends Doclet {
 			// do not user true type and do not print full name here
 			// because this produces an ugly view in the Contents section
 			// os.print("Members inherited from class "+TRUETYPE+""
-			os.print("Members inherited from class "
+			os.print("Members geerbt von Klasse "
 					+ HTMLtoLaTeXBackEnd.fixText(par.name()) + " ");
 			os.println("}{");
 
@@ -2062,8 +2062,8 @@ public class TeXDoclet extends Doclet {
 					// HTMLtoLaTeXBackEnd.fixText handle the rest.
 					htmlstr += "<TEX txt=\"\\texttt{\\small ";
 					if (hyperref) {
-						htmlstr += "\\hyperlink{"
-								+ refName(makeRefKey(linkstr)) + "}{";
+						htmlstr += "\\hyperref["
+								+ refName(makeRefKey(linkstr)) + "]{";
 					}
 					if (!link.label().isEmpty()) {
 						label = link.label();
@@ -2198,7 +2198,7 @@ public class TeXDoclet extends Doclet {
 		if (memName.equals("") == false) {
 			os.print(TRUETYPE);
 			if (hyperref) {
-				os.print("\\hyperlink{" + refName(makeRefKey(memName)) + "}{");
+				os.print("\\hyperref[" + refName(makeRefKey(memName)) + "]{");
 			}
 			// os.print(HTMLtoLaTeXBackEnd.fixText(memText));
 			// System.out.println("see also link : " + memText);
