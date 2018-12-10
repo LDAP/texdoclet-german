@@ -2060,7 +2060,7 @@ public class TeXDoclet extends Doclet {
 				} else {
 					// Encapsulate the link in a "TEX" tag and let
 					// HTMLtoLaTeXBackEnd.fixText handle the rest.
-					htmlstr += "<TEX txt=\"\\small ";
+					htmlstr += "<TEX txt=\"{\\small ";
 					if (hyperref) {
 						htmlstr += "\\hyperref["
 								+ refName(makeRefKey(linkstr)) + "]{\\ttfamily ";
