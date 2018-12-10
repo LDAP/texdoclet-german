@@ -1741,7 +1741,7 @@ public class TeXDoclet extends Doclet {
 				String classname = mem.containingClass().qualifiedName();
 				if (hyperref) {
 					os.print("\\hyperref[" + refName(makeRefKey(classname))
-							+ "]{\\ttfamily");
+							+ "]{\\ttfamily ");
 				}
 				os.print(packageRelativIdentifier(pac, classname));
 				if (hyperref) {
