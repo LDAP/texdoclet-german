@@ -43,3 +43,5 @@ Thumbs.db
 /examples/**/*.tex
 /examples/**/*.map
 /examples/**/*.png
+
+\.idea/
