@@ -260,9 +260,9 @@ public class HTMLtoLaTeXBackEnd extends HTMLEditorKit.ParserCallback {
 		} else if (tag == HTML.Tag.P) {
 			ret.append("\n\n");
 		} else if (tag == HTML.Tag.B) {
-			ret.append("{\\bf ");
+			ret.append("{\\textbf ");
 		} else if (tag == HTML.Tag.STRONG) {
-			ret.append("{\\bf ");
+			ret.append("{\\textbf ");
 		} else if (tag == HTML.Tag.A) {
 			refurl = (String) attrSet.getAttribute(HTML.Attribute.HREF);
 			doPrintURL = (String) attrSet.getAttribute("doprinturl");

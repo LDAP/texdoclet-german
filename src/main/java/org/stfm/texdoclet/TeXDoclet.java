@@ -1164,7 +1164,7 @@ public class TeXDoclet extends Doclet {
 
 			SeeTag[] sees = cd.seeTags();
 			if (sees.length > 0) {
-				os.println("\\" + sectionLevels[2] + "{See also}{}\n");
+				os.println("\\" + sectionLevels[2] + "{Siehe auch}{}\n");
 				os.println("  \\begin{list}{-- }{\\setlength{\\itemsep}{0cm}\\setlength{\\parsep}{0cm}}");
 				for (int j = 0; j < sees.length; ++j) {
 					os.print("\\item{ ");
@@ -1467,7 +1467,7 @@ public class TeXDoclet extends Doclet {
 				// See tags
 				SeeTag[] sees = f.seeTags();
 				if (sees.length > 0) {
-					os.println("\\item{{ See also}");
+					os.println("\\item{{ Siehe auch}");
 					os.println("  \\begin{itemize}");
 					for (int j = 0; j < sees.length; ++j) {
 						os.print("\\item{ ");
@@ -1826,7 +1826,7 @@ public class TeXDoclet extends Doclet {
 				os.println("\\begin{itemize}");
 				yet = true;
 			}
-			os.println("\\item{" + BOLD + " See also}");
+			os.println("\\item{" + BOLD + " Siehe auch}");
 			os.println("  \\begin{itemize}");
 			for (int j = 0; j < sees.length; ++j) {
 				os.print("\\item{ ");
@@ -2196,7 +2196,6 @@ public class TeXDoclet extends Doclet {
 		}
 
 		if (memName.equals("") == false) {
-			os.print(TRUETYPE);
 			if (hyperref) {
 				os.print("\\hyperref[" + refName(makeRefKey(memName)) + "]{\\ttfamily ");
 			}
@@ -2206,7 +2205,7 @@ public class TeXDoclet extends Doclet {
 			if (hyperref) {
 				os.print("}");
 			}
-			os.println("} {\\small ");
+			os.println(" {\\small ");
 			os.print("\\refdefined{" + refName(makeRefKey(memName)) + "}");
 			os.println("}%end");
 		} else {
