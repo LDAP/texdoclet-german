@@ -195,6 +195,8 @@ public class TeXDoclet extends Doclet {
 	public static final String DEFAULT_CLASS_FRAME = "none";
 	public static final String DEFAULT_METHOD_FRAME = "none";
 
+	public static final String V_SKIP = ""; //"\\vskip .1in";
+
 	//public static final String BOLD = "{\\bf ";
 	// no bold AND truetype support if using textbf !
 	public static final String BOLD = "\\textbf{";
@@ -708,11 +710,11 @@ public class TeXDoclet extends Doclet {
 				tocForClasses("Schnittstellen", pkg.interfaces);
 				tocForClasses("Klassen", pkg.classes);
 				tocForClasses("Ausnahmen", pkg.exceptions);
-				os.println("\\vskip .1in");
+				os.println(V_SKIP);
 				if (useHr) {
 					os.println("\\rule{\\hsize}{.7mm}");
 				}
-				os.println("\\vskip .1in");
+				os.println(V_SKIP);
 			}
 
 			// The path relative to which <IMG> will be resolved.
@@ -726,7 +728,7 @@ public class TeXDoclet extends Doclet {
 					os.println("\\mbox{}\\\\ \\rule{\\hsize}{.7mm}");
 				}
 				if (useHr) {
-					os.println("\\vskip .1in");
+					os.println(V_SKIP);
 				}
 			}
 
@@ -1156,10 +1158,10 @@ public class TeXDoclet extends Doclet {
 						+ refName(makeRefKey(cd.qualifiedName())) + "}{}");
 			}
 
-			os.println("\\vskip .1in ");
+			os.println(V_SKIP + " ");
 			if (cd.inlineTags().length > 0) {
 				printTags(cd.containingPackage(), cd.inlineTags());
-				os.println("\\vskip .1in ");
+				os.println(V_SKIP + " ");
 			}
 
 			SeeTag[] sees = cd.seeTags();
