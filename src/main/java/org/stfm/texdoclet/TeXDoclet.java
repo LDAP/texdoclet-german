@@ -898,13 +898,12 @@ public class TeXDoclet extends Doclet {
 		if (index) {
 			os.println("\\usepackage{makeidx}");
 		}
-		os.println("\\usepackage{ifpdf}");
-		os.println("\\usepackage[" + style + "]{fullpage}");
 		os.println("\\usepackage{listings}");
+		os.println("\\usepackage{needspace}");
 	}
 
 	static void printPreambleListingsOptions(PrintWriter os) {
-		os.println("\\lstset{language=Java,breaklines=true}");
+		os.println("\\lstset{language=Java,breaklines=true,breakatwhitespace=true}");
 	}
 
 	static void printPreambleTitle(PrintWriter os) {
@@ -930,15 +929,8 @@ public class TeXDoclet extends Doclet {
 	}
 
 	static void printPreambleIfPfd(PrintWriter os) {
-		os.println("\\ifpdf \\usepackage[pdftex, pdfpagemode={UseOutlines},"
-				+ "bookmarks,colorlinks,linkcolor={blue},plainpages=false,pdfpagelabels,"
-				+ "citecolor={red},breaklinks=true]{hyperref}");
-		os.println("  \\usepackage[pdftex]{graphicx}");
-		os.println("  \\pdfcompresslevel=9");
-		os.println("  \\DeclareGraphicsRule{*}{mps}{*}{}");
-		os.println("\\else");
-		os.println("  \\usepackage[dvips]{graphicx}");
-		os.println("\\fi\n");
+		os.println("\\usepackage{hyperref}");
+		os.println("\\usepackage{graphicx}");
 	}
 
 	static void printPreambleNewCommands(PrintWriter os) {
