@@ -196,6 +196,7 @@ public class TeXDoclet extends Doclet {
 	public static final String DEFAULT_METHOD_FRAME = "none";
 
 	public static final String V_SKIP = ""; //"\\vskip .1in";
+	public static final String ITEMIZE_SKIP_FIX = "\\vskip -2em"; 
 
 	//public static final String BOLD = "{\\bf ";
 	// no bold AND truetype support if using textbf !
@@ -1573,12 +1574,12 @@ public class TeXDoclet extends Doclet {
 			return;
 		}
 		if (useHr) {
-			os.println("\\rule[1em]{\\hsize}{2pt}\\vskip -2em");
+			os.println("\\rule[1em]{\\hsize}{2pt}"+ ITEMIZE_SKIP_FIX);
 		}
 		List<ExecutableMemberDoc> l = Arrays.asList(dmems);
 		Collections.sort(l);
 		Iterator<ExecutableMemberDoc> itr = l.iterator();
-		os.println("\\vskip -2em");
+		os.println(ITEMIZE_SKIP_FIX);
 		os.println("\\begin{itemize}");
 		for (int i = 0; itr.hasNext(); ++i) {
 			ExecutableMemberDoc mem = itr.next();
@@ -1899,7 +1900,7 @@ public class TeXDoclet extends Doclet {
 		}
 		os.println();
 		if (useHr) {
-			os.println("\\rule[1em]{\\hsize}{2pt}\\vskip -2em");
+			os.println("\\rule[1em]{\\hsize}{2pt}" + ITEMIZE_SKIP_FIX);
 		}
 		List<MemberDoc> l = Arrays.asList(dmems);
 		Collections.sort(l);
@@ -1921,7 +1922,7 @@ public class TeXDoclet extends Doclet {
 
 		} else {
 
-			os.println("\\vskip -2em");
+			os.println(ITEMIZE_SKIP_FIX);
 			os.println("\\begin{itemize}");
 			while (itr.hasNext()) {
 				MemberDoc mem = itr.next();
