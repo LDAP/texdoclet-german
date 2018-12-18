@@ -939,7 +939,7 @@ public class TeXDoclet extends Doclet {
 		os.println("    \\vbox{%");
 		os.println("      \\hbox to .2in{}%");
 		os.println("    }%");
-		os.println("    " + BOLD + " #1}%");
+		os.println("    \\textbf{ #1}%");
 		os.println("    \\dotfill\\pageref{#2}%");
 		os.println("  }");
 		os.println("  \\makebox[\\hsize]{%");
@@ -1652,7 +1652,7 @@ public class TeXDoclet extends Doclet {
 
 		// Some index and hyperref stuff
 		// os.println("\\item{\\vskip -1.9ex " );
-		os.println("\\item{ ");
+		os.println("\\item{ \\raggedright");
 		os.println("\\index{"
 				+ HTMLtoLaTeXBackEnd.fixText(mem.name() + mem.flatSignature())
 				+ "}");
@@ -1669,14 +1669,14 @@ public class TeXDoclet extends Doclet {
 			}
 		}
 
-		os.print(BOLD + " " + HTMLtoLaTeXBackEnd.fixText(mem.name()) + "}\\\\");
+		//os.print(BOLD + " " + HTMLtoLaTeXBackEnd.fixText(mem.name()) + "}\\\\");
 		if (hyperref) {
 			os.print("}");
 		}
 		os.println();
 
 		// Print signature
-		os.println("\\begin{lstlisting}[frame=" + methodDeclarationFrame + "]");
+		os.print("\\lstinline[columns=fixed]{");
 		if (!mem.containingClass().isInterface()) {
 			os.print(mem.modifiers() + " ");
 		}
@@ -1719,7 +1719,8 @@ public class TeXDoclet extends Doclet {
 				os.print(", " + thrownExceptions[e].qualifiedName());
 			}
 		}
-		os.println("\\end{lstlisting} %end signature");
+		//os.println("\\end{lstlisting} %end signature");
+		os.println("} %end signature");
 		boolean yet = false;
 
 		// Description
