@@ -903,7 +903,7 @@ public class TeXDoclet extends Doclet {
 	}
 
 	static void printPreambleListingsOptions(PrintWriter os) {
-		os.println("\\lstset{language=Java,breaklines=true,breakatwhitespace=true}");
+		os.println("\\lstset{language=Java,breaklines=true");
 	}
 
 	static void printPreambleTitle(PrintWriter os) {
