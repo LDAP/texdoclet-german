@@ -1,6 +1,8 @@
 TeXDoclet
 =========
 
+**This is a German fork of the original texdoclet.**
+
 TeXDoclet is a Java doclet implementation that generates a LaTeX file from you Java code documentation.
 
 The doclet is based on the doclet originally created by Greg Wonderly of
